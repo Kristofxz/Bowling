@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Bowling</string>
+    <string name="default_web_client_id">454525725941-q6u7lvl6ppamjuhhjnulajj2168nitej.apps.googleusercontent.com</string>
+    <string name="email_c_m">Email cím</string>
+    <string name="jelsz">Jelszó</string>
+    <string name="bejelentkez_s">Bejelentkezés</string>
+    <string name="regisztr_ci">Regisztráció</string>
+    <string name="email">Email</string>
+    <string name="vezet_kn_v">Vezetéknév</string>
+    <string name="keresztn_v">Keresztnév</string>
+    <string name="vissza">Vissza</string>
+    <string name="admin">admin</string>
+    <string name="f_oldal">Főoldal</string>
+    <string name="profil">Profil</string>
+    <string name="kil_p_s">Kilépés</string>
+    <string name="emailc">Email:</string>
+    <string name="uid">UID:</string>
+    <string name="dv_z_lj_k_az_oldalon">Üdvözöljük az oldalon!</string>
+</resources>
