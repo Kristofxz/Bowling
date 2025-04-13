@@ -158,12 +158,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void updateUI(FirebaseUser user) {
         if (user != null) {
-            new Handler(Looper.getMainLooper()).postDelayed(() -> {
-                Intent intent = new Intent(MainActivity.this, mainPage.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_r, R.anim.slide_out_l);
-                finish();
-            }, 1000);
+
+            Intent intent = new Intent(MainActivity.this, mainPage.class); // vagy a megfelelő activity
+            startActivity(intent);
+            finish();
+        } else {
+            Toast.makeText(MainActivity.this, "Bejelentkezés szükséges!", Toast.LENGTH_SHORT).show();
         }
     }
 
