@@ -1,33 +1,41 @@
 package com.example.bowling;
 
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.app.NotificationManager;
+import android.app.NotificationChannel;
+import android.app.PendingIntent;
+import androidx.core.app.NotificationCompat;
 import android.os.Build;
+import android.util.Log;
+import android.widget.Toast;
 
 public class AlarmReceiver extends BroadcastReceiver {
+
+    private static final String CHANNEL_ID = "bowling_channel";
+
     @Override
     public void onReceive(Context context, Intent intent) {
-        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        String channelId = "bowling_channel";
+        Log.d("AlarmReceiver", "Alarm received!");
+        Toast.makeText(context, "Alarm triggered!", Toast.LENGTH_SHORT).show();
 
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel(channelId, "Bowling Notifications", NotificationManager.IMPORTANCE_DEFAULT);
+        NotificationManager notificationManager =
+                (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID,
+                    "Bowling channel",
+                    NotificationManager.IMPORTANCE_DEFAULT);
             notificationManager.createNotificationChannel(channel);
         }
 
-        Notification.Builder builder = null;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            builder = new Notification.Builder(context, channelId)
-                    .setContentTitle("Bowling App Emlékeztető")
-                    .setContentText("Holnap van a lefoglalt időpontod.")
-                    .setSmallIcon(R.drawable.ic_launcher_foreground)
-                    .setAutoCancel(true);
-        }
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
+                .setSmallIcon(R.drawable.ic_launcher_foreground)
+                .setContentTitle("Bowling emlékeztető")
+                .setContentText("Eljött az időpontod a bowlingra!")
+                .setAutoCancel(true);
 
-        notificationManager.notify(2, builder.build());
+        notificationManager.notify(100, builder.build());
     }
 }

@@ -11,6 +11,9 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -33,6 +36,7 @@ public class mainPage extends AppCompatActivity {
 
     private TextView welcomeTextView;
     private LinearLayout slotContainer;
+
     private static final int REQUEST_CODE_NOTIFICATION_PERMISSION = 1001;
 
     @Override
@@ -115,8 +119,11 @@ public class mainPage extends AppCompatActivity {
 
         db.collection("slots")
                 .whereEqualTo("reserved", false)
+                .orderBy("index")
+                .limit(10)
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
+                    slotContainer.removeAllViews();
                     for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
                         String date = doc.getString("date");
                         String time = doc.getString("time");
@@ -130,7 +137,15 @@ public class mainPage extends AppCompatActivity {
                                     .addOnSuccessListener(aVoid -> {
                                         Toast.makeText(this, "Sikeres foglalás", Toast.LENGTH_SHORT).show();
                                         showNotification();
-                                        slotContainer.removeView(bookBtn);
+
+                                        // Disable button, hogy ne foglalják újra
+                                        bookBtn.setEnabled(false);
+                                        bookBtn.setText("Foglalt: " + date + " " + time + " | Pálya " + lane);
+
+                                        // Animáció betöltése és indítása
+                                        Animation pulse = AnimationUtils.loadAnimation(this, R.anim.pulse);
+                                        bookBtn.startAnimation(pulse);
+
                                         long triggerTime = System.currentTimeMillis() + 5 * 60 * 1000;
                                         setAlarm(triggerTime);
                                     })
@@ -186,8 +201,12 @@ public class mainPage extends AppCompatActivity {
     private void setAlarm(long triggerAtMillis) {
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, AlarmReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
+        int requestCode = (int) System.currentTimeMillis();  // egyedi kérés
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, requestCode, intent, PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
 
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, triggerAtMillis, pendingIntent);
+
+        Log.d("mainPage", "Alarm set for " + triggerAtMillis);
     }
 }

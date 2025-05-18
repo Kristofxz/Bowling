@@ -1,36 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/admin_add_slot_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="24dp">
+    android:padding="16dp">
 
-    <EditText
-        android:id="@+id/dateInput"
-        android:inputType="date"
-        android:layout_width="373dp"
-        android:layout_height="80dp"
-        android:hint="@string/d_tum_yyyy_mm_dd" />
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-    <EditText
-        android:id="@+id/timeInput"
-        android:inputType="datetime"
-        android:layout_width="373dp"
-        android:layout_height="70dp"
-        android:hint="@string/id_pont_hh_mm" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/laneInput"
-        android:inputType="number"
-        android:layout_width="373dp"
-        android:layout_height="76dp"
-        android:hint="@string/p_lyasz_m" />
+            <EditText
+                android:id="@+id/dateInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/d_tum_yyyy_mm_dd"
+                android:inputType="date" />
 
-    <Button
-        android:id="@+id/addSlotButton"
-        android:layout_width="373dp"
-        android:layout_height="90dp"
-        android:text="@string/id_pont_hozz_ad_sa" />
+            <EditText
+                android:id="@+id/timeInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/id_pont_hh_mm"
+                android:inputType="time" />
 
-</LinearLayout>
+            <EditText
+                android:id="@+id/laneInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/p_lyasz_m"
+                android:inputType="number" />
+
+            <Button
+                android:id="@+id/addSlotButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/id_pont_hozz_ad_sa" />
+
+            <LinearLayout
+                android:id="@+id/slotsLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="16dp" />
+        </LinearLayout>
+    </ScrollView>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/windowBackground"
+        app:menu="@menu/bottom_nav_menu"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
