@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/admin_add_slot_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <EditText
+        android:id="@+id/dateInput"
+        android:inputType="date"
+        android:layout_width="373dp"
+        android:layout_height="80dp"
+        android:hint="@string/d_tum_yyyy_mm_dd" />
+
+    <EditText
+        android:id="@+id/timeInput"
+        android:inputType="datetime"
+        android:layout_width="373dp"
+        android:layout_height="70dp"
+        android:hint="@string/id_pont_hh_mm" />
+
+    <EditText
+        android:id="@+id/laneInput"
+        android:inputType="number"
+        android:layout_width="373dp"
+        android:layout_height="76dp"
+        android:hint="@string/p_lyasz_m" />
+
+    <Button
+        android:id="@+id/addSlotButton"
+        android:layout_width="373dp"
+        android:layout_height="90dp"
+        android:text="@string/id_pont_hozz_ad_sa" />
+
+</LinearLayout>

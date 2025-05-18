@@ -16,4 +16,9 @@
     <string name="emailc">Email:</string>
     <string name="uid">UID:</string>
     <string name="dv_z_lj_k_az_oldalon">Üdvözöljük az oldalon!</string>
+    <string name="d_tum_yyyy_mm_dd">Dátum (YYYY-MM-DD)</string>
+    <string name="id_pont_hh_mm">Időpont (HH:MM)</string>
+    <string name="p_lyasz_m">Pályaszám</string>
+    <string name="id_pont_hozz_ad_sa">Időpont hozzáadása</string>
+    <string name="hozz_ad_s">Hozzáadás</string>
 </resources>
