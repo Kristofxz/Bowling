@@ -138,11 +138,11 @@ public class mainPage extends AppCompatActivity {
                                         Toast.makeText(this, "Sikeres foglalás", Toast.LENGTH_SHORT).show();
                                         showNotification();
 
-                                        // Disable button, hogy ne foglalják újra
+
                                         bookBtn.setEnabled(false);
                                         bookBtn.setText("Foglalt: " + date + " " + time + " | Pálya " + lane);
 
-                                        // Animáció betöltése és indítása
+
                                         Animation pulse = AnimationUtils.loadAnimation(this, R.anim.pulse);
                                         bookBtn.startAnimation(pulse);
 
@@ -201,7 +201,7 @@ public class mainPage extends AppCompatActivity {
     private void setAlarm(long triggerAtMillis) {
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, AlarmReceiver.class);
-        int requestCode = (int) System.currentTimeMillis();  // egyedi kérés
+        int requestCode = (int) System.currentTimeMillis();
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, requestCode, intent, PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
 

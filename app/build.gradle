@@ -31,7 +31,7 @@ android {
 }
 
 dependencies {
-    // Alap komponensek
+
     implementation libs.appcompat
     implementation libs.material
     implementation libs.activity
@@ -40,12 +40,12 @@ dependencies {
     implementation libs.firebase.storage
 
 
-    // Teszt
+
     testImplementation libs.junit
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core
 
-    // Firebase (BOM-mal)
+
     implementation platform(libs.firebase.bom)
     implementation libs.firebase.auth
     implementation libs.firebase.analytics

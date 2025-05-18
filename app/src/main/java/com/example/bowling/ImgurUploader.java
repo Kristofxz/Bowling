@@ -15,7 +15,7 @@ import java.io.InputStream;
 
 public class ImgurUploader {
 
-    private static final String IMGUR_CLIENT_ID = "0b177a9bdea895f";  // ide tedd a Client ID-t
+    private static final String IMGUR_CLIENT_ID = "0b177a9bdea895f";
 
     public interface UploadCallback {
         void onSuccess(String imageUrl);
@@ -24,7 +24,7 @@ public class ImgurUploader {
 
     public static void uploadImage(Uri imageUri, Context context, UploadCallback callback) {
         try {
-            // Kép beolvasása Uri-ból és Base64 kódolása
+
             InputStream inputStream = context.getContentResolver().openInputStream(imageUri);
             assert inputStream != null;
             byte[] bytes = getBytes(inputStream);
@@ -57,7 +57,7 @@ public class ImgurUploader {
 
                     String responseBody = response.body().string();
 
-                    // JSON válasz feldolgozása, hogy kiolvasd a kép URL-jét
+
                     try {
                         JSONObject json = new JSONObject(responseBody);
                         String link = json.getJSONObject("data").getString("link");

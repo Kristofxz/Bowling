@@ -38,7 +38,7 @@ public class AdminAddSlotActivity extends AppCompatActivity {
         timeInput = findViewById(R.id.timeInput);
         laneInput = findViewById(R.id.laneInput);
         addSlotButton = findViewById(R.id.addSlotButton);
-        slotsLayout = findViewById(R.id.slotsLayout); // ez egy ScrollView-on belüli LinearLayout legyen
+        slotsLayout = findViewById(R.id.slotsLayout);
         db = FirebaseFirestore.getInstance();
 
         setupDateTimePickers();
@@ -139,7 +139,7 @@ public class AdminAddSlotActivity extends AppCompatActivity {
                             .add(slot)
                             .addOnSuccessListener(documentReference -> {
                                 Toast.makeText(this, "Időpont hozzáadva", Toast.LENGTH_SHORT).show();
-                                loadAllSlots(); // frissítsük a listát
+                                loadAllSlots();
                             })
                             .addOnFailureListener(e ->
                                     Toast.makeText(this, "Hiba: " + e.getMessage(), Toast.LENGTH_SHORT).show()
@@ -175,7 +175,7 @@ public class AdminAddSlotActivity extends AppCompatActivity {
                                     .delete()
                                     .addOnSuccessListener(unused -> {
                                         Toast.makeText(this, "Slot törölve", Toast.LENGTH_SHORT).show();
-                                        loadAllSlots(); // frissítés törlés után
+                                        loadAllSlots();
                                     })
                                     .addOnFailureListener(e -> {
                                         Toast.makeText(this, "Hiba: " + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -186,7 +186,7 @@ public class AdminAddSlotActivity extends AppCompatActivity {
                         slotLayout.addView(deleteBtn);
                         slotsLayout.addView(slotLayout);
 
-                        // Animáció hozzáadása
+
                         slotLayout.setAlpha(0f);
                         slotLayout.setScaleX(0.8f);
                         slotLayout.setScaleY(0.8f);

@@ -25,21 +25,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/d_tum_yyyy_mm_dd"
-                android:inputType="date" />
+                android:importantForAccessibility="no"
+                android:inputType="date"
+                android:minHeight="48dp" />
 
             <EditText
                 android:id="@+id/timeInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/id_pont_hh_mm"
-                android:inputType="time" />
+                android:inputType="time"
+                android:minHeight="48dp" />
 
             <EditText
                 android:id="@+id/laneInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/p_lyasz_m"
-                android:inputType="number" />
+                android:inputType="number"
+                android:minHeight="48dp" />
 
             <Button
                 android:id="@+id/addSlotButton"

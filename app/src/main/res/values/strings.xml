@@ -24,4 +24,8 @@
     <string name="lefoglalt_id_pontok_megtekint_se">Lefoglalt időpontok megtekintése</string>
     <string name="k_p_felt_lt_se">Kép feltöltése</string>
     <string name="id_pontok">Időpontok:</string>
+    <string name="k_p_k_sz_t_se">Kép készítése</string>
+    <string name="profil_t_rl_se">Profil törlése</string>
+    <string name="jelsz_m_dos_t_sa">Jelszó módosítása</string>
+    <string name="j_jelsz">Új jelszó</string>
 </resources>

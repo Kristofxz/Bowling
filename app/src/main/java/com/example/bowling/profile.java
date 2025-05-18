@@ -1,6 +1,8 @@
 package com.example.bowling;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -86,7 +88,14 @@ public class profile extends AppCompatActivity {
 
         loadProfileImage();
 
-
+        Button takePhotoButton = findViewById(R.id.takePhotoButton);
+        takePhotoButton.setOnClickListener(v -> {
+            if (checkSelfPermission(android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{android.Manifest.permission.CAMERA}, CAMERA_PERMISSION_CODE);
+            } else {
+                openCamera();
+            }
+        });
 
         EditText newPasswordEditText = findViewById(R.id.newPasswordEditText);
         Button changePasswordButton = findViewById(R.id.changePasswordButton);
@@ -200,11 +209,29 @@ public class profile extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             Uri imageUri = data.getData();
             uploadImageToImgur(imageUri);
+        } else if (requestCode == CAMERA_REQUEST_CODE && resultCode == RESULT_OK) {
+
+            Bundle extras = data.getExtras();
+            if (extras != null) {
+                Bitmap imageBitmap = (Bitmap) extras.get("data");
+
+                Uri tempUri = Utils.getImageUri(this, imageBitmap);
+                uploadImageToImgur(tempUri);
+            }
         }
     }
+
+    private void openCamera() {
+        Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+        if (cameraIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(cameraIntent, CAMERA_REQUEST_CODE);
+        }
+    }
+
 
     private void uploadImageToImgur(Uri imageUri) {
         ImgurUploader.uploadImage(imageUri, this, new ImgurUploader.UploadCallback() {
@@ -213,7 +240,7 @@ public class profile extends AppCompatActivity {
                 runOnUiThread(() -> {
                     Toast.makeText(profile.this, "Feltöltés sikeres", Toast.LENGTH_SHORT).show();
 
-                    // Firestore frissítés a kapott Imgur URL-lel
+
                     FirebaseFirestore.getInstance().collection("users").document(userId)
                             .update("profilePictureUrl", imageUrl)
                             .addOnSuccessListener(aVoid -> {
@@ -298,7 +325,7 @@ public class profile extends AppCompatActivity {
                             db.collection("slots").document(docId)
                                     .update(update)
                                     .addOnSuccessListener(unused -> {
-                                        // Animáció indítása a slotLayouton
+
                                         Animation slideOut = AnimationUtils.loadAnimation(this, R.anim.slide_out_left);
                                         slideOut.setAnimationListener(new Animation.AnimationListener() {
                                             @Override
@@ -306,7 +333,7 @@ public class profile extends AppCompatActivity {
 
                                             @Override
                                             public void onAnimationEnd(Animation animation) {
-                                                // Animáció vége után eltávolítjuk a nézetet
+
                                                 bookedSlotsLayout.removeView(slotLayout);
                                                 Toast.makeText(profile.this, "Időpont szabaddá téve", Toast.LENGTH_SHORT).show();
                                             }
@@ -327,5 +354,19 @@ public class profile extends AppCompatActivity {
                     }
                 });
     }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == CAMERA_PERMISSION_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                openCamera();
+            } else {
+                Toast.makeText(this, "Kamera engedély szükséges a fényképezéshez", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+
 
 }

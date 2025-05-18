@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_profile"
@@ -8,153 +9,142 @@
     android:padding="16dp"
     tools:context=".profile">
 
-    <!-- Profil adatok -->
+    <TextView
+        android:id="@+id/profileTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/profil"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageView
         android:id="@+id/profileImageView"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_margin="16dp"
+        android:layout_marginTop="16dp"
         android:scaleType="centerCrop"
         android:src="@drawable/default_profile"
-        app:layout_constraintBottom_toTopOf="@+id/emailTextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintTop_toBottomOf="@id/profileTitle"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profileTitle"
-        app:layout_constraintVertical_bias="0.101" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/uploadImageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/k_p_felt_lt_se"
-        app:layout_constraintBottom_toTopOf="@+id/emailTextView"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profileImageView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profileImageView" />
+        android:layout_marginTop="12dp"/>
 
-    <TextView
-        android:id="@+id/profileTitle"
+    <Button
+        android:id="@+id/takePhotoButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Profil"
-        android:textSize="24sp"
+        android:text="@string/k_p_k_sz_t_se"
+        app:layout_constraintTop_toBottomOf="@id/profileImageView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <!-- Keresztnév -->
+        android:layout_marginTop="12dp"/>
 
     <TextView
         android:id="@+id/emailTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="188dp"
-        android:text="Email"
+        android:text="@string/email"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintTop_toBottomOf="@id/uploadImageButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/profileTitle" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
 
     <TextView
         android:id="@+id/firstNameTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Keresztnév"
+        android:text="@string/keresztn_v"
         android:textSize="18sp"
         app:layout_constraintTop_toBottomOf="@id/emailTextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginTop="8dp" />
 
-    <!-- Vezetéknev -->
     <TextView
         android:id="@+id/lastNameTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Vezetéknév"
+        android:text="@string/vezet_kn_v"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/firstNameTextView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/firstNameTextView" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp" />
 
     <EditText
         android:id="@+id/newPasswordEditText"
-        android:layout_width="371dp"
-        android:layout_height="50dp"
-        android:hint="Új jelszó"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/j_jelsz"
         android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:layout_marginTop="16dp"
+        android:padding="12dp"
+        app:layout_constraintTop_toBottomOf="@id/lastNameTextView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lastNameTextView"
-        app:layout_constraintVertical_bias="0.041" />
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/changePasswordButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/jelsz_m_dos_t_sa"
+        android:layout_marginTop="12dp"
+        app:layout_constraintTop_toBottomOf="@id/newPasswordEditText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <ScrollView
         android:id="@+id/scrollViewBookedSlots"
-        android:layout_width="374dp"
-        android:layout_height="127dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="12dp"
         android:importantForAccessibility="no"
-        app:layout_constraintBottom_toTopOf="@+id/deleteProfileButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintTop_toBottomOf="@id/changePasswordButton"
+        app:layout_constraintBottom_toTopOf="@id/deleteProfileButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newPasswordEditText"
-        app:layout_constraintVertical_bias="0.709">
+        app:layout_constraintEnd_toEndOf="parent">
 
         <LinearLayout
             android:id="@+id/bookedSlotsLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical" />
 
-        </LinearLayout>
     </ScrollView>
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation"
-        android:layout_width="383dp"
-        android:layout_height="76dp"
-        android:background="?android:attr/windowBackground"
-        app:labelVisibilityMode="labeled"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.521"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lastNameTextView"
-        app:layout_constraintVertical_bias="1.0"
-        app:menu="@menu/bottom_nav_menu"
-        tools:ignore="VisualLintBottomNav" />
-
-    <Button
-        android:id="@+id/changePasswordButton"
-        android:layout_width="361dp"
-        android:layout_height="54dp"
-        android:text="Jelszó módosítása"
-        app:layout_constraintBottom_toTopOf="@+id/scrollViewBookedSlots"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.555"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lastNameTextView"
-        app:layout_constraintVertical_bias="0.789" />
 
     <Button
         android:id="@+id/deleteProfileButton"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="300dp"
-        android:layout_marginBottom="38dp"
         android:background="@android:color/holo_red_dark"
-        android:text="Profil törlése"
+        android:text="@string/profil_t_rl_se"
         android:textColor="@android:color/white"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newPasswordEditText" />
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/windowBackground"
+        app:menu="@menu/bottom_nav_menu"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
